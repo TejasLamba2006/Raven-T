@@ -8,17 +8,17 @@ Offical Discord of Raven T:
 
 
 # Installation & Download
- - Download the latest version [here](https://raw.githubusercontent.com/K-ov/Raven-bPLUS/stable/build/libs/%5B1.8.9%5D%20BetterKeystrokes%20V-1.2.jar)
+ - Download the latest version [here](https://github.com/TejasLamba2006/Raven-T/releases/latest)
  - Download forge for 1.8.9 [here](https://maven.minecraftforge.net/net/minecraftforge/forge/1.8.9-11.15.1.2318-1.8.9/forge-1.8.9-11.15.1.2318-1.8.9-installer.jar)
  and run the installer.
  - If you cant find the forge version, please close the minecraft launcher using the task manager. If you still need help join the [discord](https://discord.gg/UqJ8ngteud).
- - After launching the forge version once, you can navigate to %appdata%\.minecraft\mods (I don't know where the .mc folder is located in linux) and put the mod you downloaded [here](https://raw.githubusercontent.com/K-ov/Raven-bPLUS/stable/build/libs/%5B1.8.9%5D%20BetterKeystrokes%20V-1.2.jar) in there.
+ - After launching the forge version once, you can navigate to %appdata%\.minecraft\mods (I don't know where the .mc folder is located in linux) and put the mod you downloaded [here](https://github.com/TejasLamba2006/Raven-T/releases/latest) in there.
  - Then you launch forge and youre good to go. If you need help you can still join our [discord](https://discord.gg/RV6sWX9d7p)!
 
 
 ## User
-[Latest](https://raw.githubusercontent.com/K-ov/Raven-bPLUS/stable/build/libs/%5B1.8.9%5D%20BetterKeystrokes%20V-1.2.jar) <br> (Probs have quite a few bugs but no game breaking ones </br>
-<br>[Stable versions] All previous versions can be found in the dc server </br>
+[Latest](https://github.com/TejasLamba2006/Raven-T/releases/latest) <br> (Probs have quite a few bugs but no game breaking ones </br>
+<br>[Stable versions] All previous versions can be found in the releases https://github.com/TejasLamba2006/Raven-T/releases </br>
 
 
 ## How2build it yourself

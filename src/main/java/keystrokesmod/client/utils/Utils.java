@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.network.play.client.C0APacketAnimation;
 import net.minecraft.util.Timer;
 import org.jetbrains.annotations.NotNull;
@@ -99,6 +103,32 @@ public class Utils {
     public static final String md = "Mode: ";
 
     public static class Player {
+
+        public static int getTool(Block block) {
+            float n = 1.0f;
+            int n2 = -1;
+            for (int i = 0; i < InventoryPlayer.getHotbarSize(); ++i) {
+                final ItemStack getStackInSlot = mc.thePlayer.inventory.getStackInSlot(i);
+                if (getStackInSlot != null) {
+                    final float a = getEfficiency(getStackInSlot, block);
+                    if (a > n) {
+                        n = a;
+                        n2 = i;
+                    }
+                }
+            }
+            return n2;
+        }
+        public static float getEfficiency(final ItemStack itemStack, final Block block) {
+            float getStrVsBlock = itemStack.getStrVsBlock(block);
+            if (getStrVsBlock > 1.0f) {
+                final int getEnchantmentLevel = EnchantmentHelper.getEnchantmentLevel(Enchantment.efficiency.effectId, itemStack);
+                if (getEnchantmentLevel > 0) {
+                    getStrVsBlock += getEnchantmentLevel * getEnchantmentLevel + 1;
+                }
+            }
+            return getStrVsBlock;
+        }
 
         public static boolean isPlayerInChest() {
             return (mc.currentScreen != null) && (mc.thePlayer.inventoryContainer != null) && (mc.thePlayer.inventoryContainer instanceof ContainerPlayer) && (mc.currentScreen instanceof GuiChest);

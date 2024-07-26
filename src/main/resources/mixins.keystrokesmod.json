@@ -14,7 +14,9 @@
         "MixinGuiUtilRenderComponents",
         "MixinMinecraft",
         "MixinNetworkManager",
-        "MixinEntityLivingBase"
+        "MixinEntityLivingBase",
+        "PlayerControllerMPAccessor",
+        "EntityAccessor"
     ],
     "client": [
         "IMinecraft"

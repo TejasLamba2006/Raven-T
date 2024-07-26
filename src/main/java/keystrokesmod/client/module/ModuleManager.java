@@ -56,12 +56,7 @@ import keystrokesmod.client.module.modules.movement.Sprint;
 import keystrokesmod.client.module.modules.movement.StopMotion;
 import keystrokesmod.client.module.modules.movement.Timer;
 import keystrokesmod.client.module.modules.movement.VClip;
-import keystrokesmod.client.module.modules.other.Disabler;
-import keystrokesmod.client.module.modules.other.FakeChat;
-import keystrokesmod.client.module.modules.other.MiddleClick;
-import keystrokesmod.client.module.modules.other.NameHider;
-import keystrokesmod.client.module.modules.other.Spin;
-import keystrokesmod.client.module.modules.other.WaterBucket;
+import keystrokesmod.client.module.modules.other.*;
 import keystrokesmod.client.module.modules.player.*;
 import keystrokesmod.client.module.modules.render.*;
 import keystrokesmod.client.module.modules.world.AntiBot;
@@ -166,6 +161,10 @@ public class ModuleManager {
         addModule(new Targets());
         addModule(new Indicators());
         addModule(new AntiFireball());
+        addModule(new BreakProgress());
+        addModule(new BedPlates());
+        addModule(new RotationHandler());
+        addModule(new SlotHandler());
         //addModule(new CursorTrail());
 
         //addModule(new SpeedTest());

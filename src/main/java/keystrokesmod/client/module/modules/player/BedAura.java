@@ -16,7 +16,7 @@ public class BedAura extends Module {
     public static DescriptionSetting d;
     public static SliderSetting r;
     private java.util.Timer t;
-    private BlockPos m;
+    public static BlockPos m;
     private final long per = 600L;
 
     public BedAura() {

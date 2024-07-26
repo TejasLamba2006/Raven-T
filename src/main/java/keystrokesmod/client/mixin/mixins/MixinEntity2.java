@@ -45,8 +45,12 @@ public abstract class MixinEntity2 {
        return this.getVectorForRotation(f, f1);
    } */
 
+   /**
+    * @author
+    * @reason
+    */
    @Overwrite
-   public Vec3 getVectorForRotation(float pitch, float yaw) {
+   public final Vec3 getVectorForRotation(float pitch, float yaw) {
        if((Object) this == Minecraft.getMinecraft().thePlayer) {
            LookEvent e = new LookEvent(pitch, yaw);
            Raven.eventBus.post(e);

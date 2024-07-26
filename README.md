@@ -28,8 +28,12 @@ Offical Discord of Raven T:
 4. Find the build in builds/libs in the direcotry you cloned this to.
 
 
-## Improved Modules
-Will be updated accordingly to the latest version of the client.
+## Improved/Added Modules
+### Render
+- **Indicators** - Shows arrow where players, ender pearls, fireballs, projectiles are coming from!
+
+### Player
+- **AntiFireball** - Automatically shoots fireballs back at the player who shot them!
 
 
 ## Contributing

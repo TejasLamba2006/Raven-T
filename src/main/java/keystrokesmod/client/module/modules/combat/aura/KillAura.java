@@ -36,7 +36,7 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 // uh there was one other thing as well
 public class KillAura extends Module {
 
-    private EntityPlayer target;
+    public static EntityPlayer target;
 
     public static SliderSetting rotationDistance, fov, reach, rps;
     private DoubleSliderSetting cps;

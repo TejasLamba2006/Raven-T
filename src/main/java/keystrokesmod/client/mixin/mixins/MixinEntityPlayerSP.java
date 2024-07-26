@@ -1,15 +1,16 @@
 package keystrokesmod.client.mixin.mixins;
 
+import keystrokesmod.client.event.impl.*;
+import keystrokesmod.client.module.modules.other.RotationHandler;
+import net.minecraft.network.play.client.C0CPacketInput;
+import net.minecraft.util.BlockPos;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-
+import keystrokesmod.client.utils.RotationUtils;
 import com.mojang.authlib.GameProfile;
-
 import keystrokesmod.client.event.EventTiming;
-import keystrokesmod.client.event.impl.TickEvent;
-import keystrokesmod.client.event.impl.UpdateEvent;
 import keystrokesmod.client.main.Raven;
 import keystrokesmod.client.module.Module;
 import keystrokesmod.client.module.modules.movement.NoSlow;
@@ -106,7 +107,16 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
     public void onUpdateWalkingPlayer() {
 
         Raven.eventBus.post(new TickEvent());
-
+        Raven.eventBus.post(new PreMotionEvent(
+                this.posX,
+                this.getEntityBoundingBox().minY,
+                this.posZ,
+                RotationHandler.getRotationYaw(),
+                RotationHandler.getRotationPitch(),
+                this.onGround,
+                this.isSprinting(),
+                this.isSneaking()
+        ));
         boolean flag = this.isSprinting();
         if (flag != this.serverSprintState) {
             if (flag)
@@ -181,7 +191,33 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
         }
 
     }
+    /**
+     * @author Tejas Lamba
+     * @reason fixing
+     */
+    @Overwrite
+    public void onUpdate() {
+        if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0, this.posZ))) {
+            RotationUtils.prevRenderPitch = RotationUtils.renderPitch;
+            RotationUtils.prevRenderYaw = RotationUtils.renderYaw;
 
+            UpdateEvent e =  new UpdateEvent(EventTiming.PRE, this.posX, this.getEntityBoundingBox().minY, this.posZ,
+                    this.rotationYaw, this.rotationPitch, this.onGround);
+            Raven.eventBus.post(e);
+
+            super.onUpdate();
+
+            if (this.isRiding()) {
+                this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(this.rotationYaw, this.rotationPitch, this.onGround));
+                this.sendQueue.addToSendQueue(new C0CPacketInput(this.moveStrafing, this.moveForward, this.movementInput.jump, this.movementInput.sneak));
+            } else {
+                this.onUpdateWalkingPlayer();
+            }
+
+            Raven.eventBus.post(UpdateEvent.convertPost(e));
+        }
+
+    }
     /**
      * @author mc code
      * @reason i tried other ways of doing this, nothing else worked

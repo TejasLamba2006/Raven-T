@@ -26,6 +26,7 @@ public class Module {
     protected ModuleComponent component;
 
     protected static Minecraft mc;
+    protected boolean canBeEnabled =  true;
     private boolean isToggled;
 
     private String description = "";
@@ -113,7 +114,7 @@ public class Module {
     }
 
     public boolean canBeEnabled() {
-        return true;
+        return canBeEnabled;
     }
 
     public boolean showInHud() {

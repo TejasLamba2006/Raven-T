@@ -54,7 +54,7 @@ public class LeftClicker extends Module {
     private double leftm;
     private boolean leftn;
     private boolean breakHeld;
-    private boolean hitSelected;
+    public static boolean hitSelected;
     private Random rand;
     private Method playerMouseInput;
     public EntityLivingBase target;
@@ -103,6 +103,10 @@ public class LeftClicker extends Module {
         this.leftDownTime = 0L;
         this.leftUpTime = 0L;
         autoClickerEnabled = false;
+    }
+
+    public static boolean isHitSelected() {
+        return hitSelected;
     }
 
     @Subscribe

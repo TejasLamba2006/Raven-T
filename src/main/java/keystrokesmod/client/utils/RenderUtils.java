@@ -189,4 +189,29 @@ public class RenderUtils {
             return new ResourceLocation("null");
         }
     }
+
+    public static void drawArrow(float x, float y, int color, double width, double length) {
+        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        RenderUtils.glColor(color);
+        GL11.glLineWidth((float) width);
+        float halfWidth = (float) (width / 2.0);
+        float xOffset = halfWidth / 2.0f;
+        float yOffset = halfWidth / 2.0f;
+        GL11.glBegin(GL11.GL_LINES);
+        GL11.glVertex2d(x - xOffset, y + yOffset);
+        GL11.glVertex2d(x + length - xOffset, y - length + yOffset);
+        GL11.glVertex2d(x + length - xOffset, y - length + yOffset);
+        GL11.glVertex2d(x + 2 * length - xOffset, y + yOffset);
+        GL11.glEnd();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glPopMatrix();
+    }
+
+    public static void glColor(final int n) { // credit to the creator of raven b4
+        GL11.glColor4f((float) (n >> 16 & 0xFF) / 255.0f, (float) (n >> 8 & 0xFF) / 255.0f, (float) (n & 0xFF) / 255.0f, (float) (n >> 24 & 0xFF) / 255.0f);
+    }
+
 }

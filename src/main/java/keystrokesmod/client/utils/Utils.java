@@ -107,6 +107,7 @@ public class Utils {
         public static boolean isPlayerInInventory() {
             return (mc.currentScreen != null) && (mc.thePlayer.inventoryContainer != null) && (mc.thePlayer.inventoryContainer instanceof ContainerPlayer) && (mc.currentScreen instanceof GuiInventory);
         }
+
         public static void attackEntity(Entity e, boolean clientSwing) {
             boolean attack = LeftClicker.isHitSelected();
             if (clientSwing) {
@@ -116,6 +117,7 @@ public class Utils {
             }
             if (!attack) mc.playerController.attackEntity(mc.thePlayer, e);
         }
+
         public static MovingObjectPosition rayTrace(double reach, float partialTicks) {
             Entity entity = mc.getRenderViewEntity();
             if ((entity != null) && (mc.theWorld != null)) {
@@ -192,6 +194,7 @@ public class Utils {
                 mc.thePlayer.addChatMessage(new ChatComponentText(m));
             }
         }
+
         public static boolean inFov(float fov, BlockPos blockPos) {
             return inFov(fov, blockPos.getX(), blockPos.getZ());
         }
@@ -207,6 +210,7 @@ public class Utils {
                 return fovToPoint < fov;
             } else return fovToPoint > -fov;
         }
+
         public static @Range(from = -180, to = 180) double getFov(final double posX, final double posZ) {
             return MathHelper.wrapAngleTo180_double((mc.thePlayer.rotationYaw - RotationUtils.angle(posX, posZ)) % 360.0f);
         }
@@ -278,6 +282,7 @@ public class Utils {
         public static keystrokesmod.client.utils.phys.Vec3 getEyePos(Entity entity) {
             return getEyePos(entity, new keystrokesmod.client.utils.phys.Vec3(entity));
         }
+
         public static keystrokesmod.client.utils.phys.Vec3 getEyePos() {
             return getEyePos(mc.thePlayer);
         }
@@ -907,6 +912,7 @@ public class Utils {
             return (int) ((Math.random() * (v - inputMin)) + inputMin);
         }
     }
+
     public static class random {
         public static int Int(double min, double max) {
             return (int) Double(min, max);
@@ -914,6 +920,15 @@ public class Utils {
 
         public static double Double(double min, double max) {
             return Math.random() * (max - min) + min;
+        }
+
+        public static double rnd(double n, int d) {
+            if (d == 0) {
+                return (double) Math.round(n);
+            } else {
+                double p = Math.pow(10.0D, (double) d);
+                return (double) Math.round(n * p) / p;
+            }
         }
     }
 

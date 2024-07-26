@@ -42,7 +42,7 @@ Official Raven T Discord: [https://discord.gg/RV6sWX9d7p](https://discord.gg/RV6
 ### Other
 
 - 🆕 **RotationHandler** - Allows you to manage rotation for the client.
-- 🔥 **SlotHandler** - Allows you to manage inventory slots for the client.
+- 🆕 **SlotHandler** - Allows you to manage inventory slots for the client.
 ## Contributing
 
 To contribute code, follow [this guide](https://gist.github.com/MarcDiethelm/7303312#file-contributing-md). Ideally, work on the latest `dev` branch. If you have any questions, feel free to ask in the [Discord](https://discord.gg/RV6sWX9d7p).

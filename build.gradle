@@ -23,9 +23,9 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'java'
 
-version = "1.2"
+version = "1.0.0"
 group = "keystrokesmod"
-archivesBaseName = "[1.8.9] BetterKeystrokes V"
+archivesBaseName = "[1.8.9] BestKeystrokes V"
 
 compileJava {
     sourceCompatibility = '1.8'

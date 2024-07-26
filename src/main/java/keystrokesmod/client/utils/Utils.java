@@ -692,35 +692,6 @@ public class Utils {
             return astolfoColorsDraw(yOffset, yTotal, 2900F);
         }
 
-        public static int kopamedColoursDraw(int yOffset, int yTotal) {
-            float speed = 6428;
-            float hue;
-            try {
-                hue = (float) (System.currentTimeMillis() % (int) speed) + ((yTotal - yOffset) / (yOffset / yTotal));
-            } catch (ArithmeticException divisionByZero) {
-                hue = (float) (System.currentTimeMillis() % (int) speed)
-                        + ((yTotal - yOffset) / (((yOffset / yTotal) + 1) + 1));
-            }
-
-            while (hue > speed)
-                hue -= speed;
-            hue /= speed;
-            if (hue > 2)
-                hue = 2F - (hue - 2f);
-            hue += 2F;
-
-            float current = (System.currentTimeMillis() % speed) + ((yOffset + yTotal) * 9);
-
-            while (current > speed)
-                current -= speed;
-            current /= speed;
-            if (current > 2)
-                current = 2F - (current - 2f);
-            current += 2F;
-
-            return Color.HSBtoRGB((current / (current - yTotal)) + current, 1f, 1F);
-        }
-
         public static boolean openWebpage(String url) {
             try {
                 URL linkURL = null;

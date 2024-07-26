@@ -19,7 +19,7 @@ public class MixinGuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
     @Inject(method = "initGui", at = @At("RETURN"))
     public void initGui(CallbackInfo ci) {
-        splashText = SelfDestruct.selfDestructed ? splashText : "Kopamed On Top!!";
+        splashText = SelfDestruct.selfDestructed ? splashText : "Tejaslamba2006 On Top!!";
        // SoundUtils.playSound("sus");
     }
 

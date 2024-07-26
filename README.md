@@ -32,6 +32,7 @@ Official Raven T Discord: [https://discord.gg/RV6sWX9d7p](https://discord.gg/RV6
 - 🔥 **Projectiles** - Displays the landing spot of projectiles! (New options include highlighting on hit and disabling for uncharged bows).
 - 🆕 **BedPlates** - Shows what the bed is covered with.
 - 🔥 **Chams** - Renders players through walls. (Now includes AntiBot).
+- 🆕 **BreakProgress** - Show block progress in modes like percentage, seconds and decimals.
 
 ### Player
 

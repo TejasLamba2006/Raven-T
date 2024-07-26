@@ -37,7 +37,12 @@ Official Raven T Discord: [https://discord.gg/RV6sWX9d7p](https://discord.gg/RV6
 ### Player
 
 - 🆕 **AntiFireball** - Automatically shoots fireballs back at the player who shot them.
+- 🔥 **AutoTools** - Automatically selects the best tool for the block you're mining. (Now less buggy, detects enchants and has more options)
 
+### Other
+
+- 🆕 **RotationHandler** - Allows you to manage rotation for the client.
+- 🔥 **SlotHandler** - Allows you to manage inventory slots for the client.
 ## Contributing
 
 To contribute code, follow [this guide](https://gist.github.com/MarcDiethelm/7303312#file-contributing-md). Ideally, work on the latest `dev` branch. If you have any questions, feel free to ask in the [Discord](https://discord.gg/RV6sWX9d7p).

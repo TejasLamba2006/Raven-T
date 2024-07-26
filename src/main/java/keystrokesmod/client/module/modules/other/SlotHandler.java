@@ -8,6 +8,7 @@ import keystrokesmod.client.module.Module;
 import keystrokesmod.client.module.setting.impl.ComboSetting;
 import keystrokesmod.client.module.setting.impl.DescriptionSetting;
 import keystrokesmod.client.module.setting.impl.SliderSetting;
+import keystrokesmod.client.utils.Utils;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -17,13 +18,21 @@ public class SlotHandler extends Module {
         DEFAULT,
         SILENT
     }
+
     private final ComboSetting mode = new ComboSetting("Mode", Mode.DEFAULT);
     private final SliderSetting switchBackDelay = new SliderSetting("Switch back delay (ms)", 100, 0, 1000, 10);
     private static @Nullable Integer currentSlot = null;
     private static long lastSetCurrentSlotTime = -1;
+
     public SlotHandler() {
         super("Slot Handler", ModuleCategory.other);
         this.registerSettings(mode, switchBackDelay, new DescriptionSetting("Above setting only works in Silent mode"));
+    }
+
+    @Override
+    public void onDisable() {
+        Utils.Player.sendMessageToSelf("SlotHandler cannot be disabled");
+        enable();
     }
 
     public static int getCurrentSlot() {
@@ -52,9 +61,7 @@ public class SlotHandler extends Module {
     }
 
     @Subscribe
-    public void onUpdate(UpdateEvent event) {
-        if(event.getTiming() == EventTiming.POST)
-            return;
+    public void onUpdate(UpdateEvent e) {
         switch ((Mode) mode.getMode()) {
             case DEFAULT:
                 mc.thePlayer.inventory.currentItem = getCurrentSlot();

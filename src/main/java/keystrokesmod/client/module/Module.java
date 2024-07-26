@@ -26,7 +26,7 @@ public class Module {
     protected ModuleComponent component;
 
     protected static Minecraft mc;
-    protected boolean canBeEnabled =  true;
+    protected boolean canBeEnabled = true;
     private boolean isToggled;
 
     private String description = "";
@@ -122,7 +122,7 @@ public class Module {
     }
 
     public void enable() {
-        if(!canBeEnabled())
+        if (!canBeEnabled())
             return;
         this.enabled = true;
         this.onEnable();
@@ -134,7 +134,7 @@ public class Module {
     }
 
     public void disable() {
-        if(!canBeEnabled())
+        if (!canBeEnabled())
             return;
         this.enabled = false;
         if (registered) {
@@ -146,7 +146,7 @@ public class Module {
     }
 
     public void setToggled(boolean enabled) {
-        if(!canBeEnabled())
+        if (!canBeEnabled())
             return;
         if (enabled)
             enable();
@@ -251,7 +251,7 @@ public class Module {
     }
 
     public void unRegister() {
-        if(registered) {
+        if (registered) {
             registered = false;
             Raven.eventBus.unregister(this);
             onDisable();
@@ -278,7 +278,7 @@ public class Module {
         private List<ModuleCategory> childCategories = new ArrayList<ModuleCategory>();
 
         ModuleCategory(boolean defaultShown, ModuleCategory topCategory, String name) {
-            if(topCategory != null)
+            if (topCategory != null)
                 topCategory.addChildCategory(this);
             this.defaultShown = defaultShown;
             this.topCategory = topCategory;

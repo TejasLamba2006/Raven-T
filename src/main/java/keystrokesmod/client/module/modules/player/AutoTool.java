@@ -2,6 +2,7 @@ package keystrokesmod.client.module.modules.player;
 
 import com.google.common.eventbus.Subscribe;
 import keystrokesmod.client.event.impl.Render2DEvent;
+import keystrokesmod.client.event.impl.UpdateEvent;
 import keystrokesmod.client.main.Raven;
 import keystrokesmod.client.module.Module;
 import keystrokesmod.client.module.modules.combat.LeftClicker;
@@ -55,8 +56,10 @@ public class AutoTool extends Module {
         SlotHandler.setCurrentSlot(currentItem);
     }
 
-    public void onUpdate() {
-        if (!mc.inGameHasFocus || mc.currentScreen != null || (rightDisable.isToggled() && Mouse.isButtonDown(1)) || !mc.thePlayer.capabilities.allowEdit) {
+    @Subscribe
+    public void onUpdate(UpdateEvent e) {
+
+        if (!Utils.Player.isPlayerInGame() || (rightDisable.isToggled() && Mouse.isButtonDown(1)) || !mc.thePlayer.capabilities.allowEdit) {
             resetVariables();
             return;
         }

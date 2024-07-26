@@ -11,6 +11,7 @@ import keystrokesmod.client.module.setting.impl.SliderSetting;
 import keystrokesmod.client.module.setting.impl.TickSetting;
 import keystrokesmod.client.utils.AimSimulator;
 import keystrokesmod.client.utils.RotationUtils;
+import keystrokesmod.client.utils.Utils;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
@@ -23,10 +24,12 @@ public final class RotationHandler extends Module {
     private static @Nullable Float rotationPitch = null;
     private boolean isSet = false;
     private static MoveFix moveFix = MoveFix.NONE;
+
     public enum smoothBackMode {
         NONE,
         DEFAULT
     }
+
     private static final ComboSetting defaultMoveFix = new ComboSetting("Default MoveFix", MoveFix.NONE);
     private final ComboSetting smoothBack = new ComboSetting("Smooth back", smoothBackMode.NONE);
     private final SliderSetting aimSpeed = new SliderSetting("Aim speed", 5, 1, 15, 0.1);
@@ -39,7 +42,12 @@ public final class RotationHandler extends Module {
         this.registerSettings(defaultMoveFix, smoothBack, aimSpeed);
         this.registerSetting(new DescriptionSetting("Classic"));
         this.registerSettings(rotateBody, fullBody, randomYawFactor);
-        this.canBeEnabled = false;
+    }
+
+    @Override
+    public void onDisable() {
+        Utils.Player.sendMessageToSelf("RotationHandler cannot be disabled");
+        enable();
     }
 
     public static float getMovementYaw(Entity entity) {
@@ -90,12 +98,8 @@ public final class RotationHandler extends Module {
         return mc.thePlayer.rotationPitch;
     }
 
-    /**
-     * Fix movement
-     * @param event before update living entity (move)
-     */
     @Subscribe
-    public void onPreMotion(MoveInputEvent event) {
+    public void moveEvent(MoveInputEvent event) {
         if (isSet) {
             float viewYaw = RotationUtils.normalize(mc.thePlayer.rotationYaw);
             float viewPitch = RotationUtils.normalize(mc.thePlayer.rotationPitch);

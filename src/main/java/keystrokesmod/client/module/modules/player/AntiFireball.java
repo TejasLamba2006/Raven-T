@@ -1,7 +1,6 @@
 package keystrokesmod.client.module.modules.player;
 
 import com.google.common.eventbus.Subscribe;
-import keystrokesmod.client.event.EventTiming;
 import keystrokesmod.client.event.impl.ForgeEvent;
 import keystrokesmod.client.event.impl.PreMotionEvent;
 import keystrokesmod.client.main.Raven;
@@ -65,22 +64,26 @@ public class AntiFireball extends Module {
     }
 
     @Subscribe
-    public void onPreUpdate(UpdateEvent e) {
-        if(e.getTiming() == EventTiming.POST)
-            return;
+    public void onUpdate(UpdateEvent e) {
         if (!condition() || stopAttack()) {
             return;
         }
+        if (mc.currentScreen != null) {
+            attack = false;
+            fireball = null;
+            return;
+        }
+        fireball = this.getFireball();
         if (fireball != null) {
-            if (Raven.moduleManager.getModuleByClazz(KillAura.class) != null && Raven.moduleManager.getModuleByClazz(KillAura.class).isEnabled()) {
-                if (KillAura.target != null) {
-                    attack = false;
-                    return;
-                }
-                attack = true;
-            } else {
+//            if (Raven.moduleManager.getModuleByClazz(KillAura.class) != null && Raven.moduleManager.getModuleByClazz(KillAura.class).isEnabled()) {
+//                if (KillAura.target != null) {
+//                    attack = false;
+//                    return;
+//                }
+//                attack = true;
+//            } else {
                 Utils.Player.attackEntity(fireball, !silentSwing.isToggled());
-            }
+           // }
         }
     }
 
@@ -124,19 +127,6 @@ public class AntiFireball extends Module {
         this.fireball = null;
         this.attack = false;
     }
-
-    public void onUpdate() {
-        if (!condition()) {
-            return;
-        }
-        if (mc.currentScreen != null) {
-            attack = false;
-            fireball = null;
-            return;
-        }
-        fireball = this.getFireball();
-    }
-
     private boolean stopAttack() {
         return (Raven.moduleManager.getModuleByClazz(BedAura.class) != null && Raven.moduleManager.getModuleByClazz(BedAura.class).isEnabled() && BedAura.m != null) || (Raven.moduleManager.getModuleByClazz(KillAura.class) != null && Raven.moduleManager.getModuleByClazz(KillAura.class).isEnabled() && KillAura.target != null);
     }

@@ -16,9 +16,6 @@ public class CursorTrail extends Module {
 
 	private List<CursorTrailPoint> trailPoints = new ArrayList<CursorTrailPoint>();
 	private SliderSetting length;
-
-	//help me unfuck this sigma
-	//will implement new hud colors for this later
 	public CursorTrail() {
 		super("Cursor trail", ModuleCategory.render);
 		this.registerSetting(new DescriptionSetting("DO NOT USE"));

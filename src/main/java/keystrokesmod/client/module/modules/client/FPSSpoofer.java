@@ -23,7 +23,7 @@ public class FPSSpoofer extends Module {
     public FPSSpoofer() {
         super("FPSSpoof", ModuleCategory.other);
         this.registerSetting(desc = new DescriptionSetting("Spoofs your fps"));
-        this.registerSetting(fps = new DoubleSliderSetting("FPS", 99860, 100000, 0, 100000, 100));
+        this.registerSetting(fps = new DoubleSliderSetting("FPS", 300, 700, 0, 2000, 50));
 
         fpsField = ReflectionHelper.findField(Minecraft.class, "field_71420_M", "fpsCounter");
         fpsField.setAccessible(true);

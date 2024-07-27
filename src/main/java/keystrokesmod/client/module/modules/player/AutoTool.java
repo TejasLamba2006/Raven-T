@@ -56,9 +56,8 @@ public class AutoTool extends Module {
         SlotHandler.setCurrentSlot(currentItem);
     }
 
-    @Subscribe
-    public void onUpdate(UpdateEvent e) {
-
+    @Override
+    public void onUpdate() {
         if (!Utils.Player.isPlayerInGame() || (rightDisable.isToggled() && Mouse.isButtonDown(1)) || !mc.thePlayer.capabilities.allowEdit) {
             resetVariables();
             return;

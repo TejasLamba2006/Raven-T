@@ -26,7 +26,7 @@ public class NotificationRenderer {
                 || ClientConfig.applyingConfig)
             return;
 
-        if (!m.getClass().equals(Gui.class)) {
+        if (!m.getClass().equals(Gui.class) && m.moduleCategory() != Module.ModuleCategory.hotkey) {
             String s = m.isEnabled() ? "enabled" : "disabled";
             NotificationManager
                     .show(new Notification(NotificationType.INFO, "Module " + s, m.getName() + " has been " + s, 1));

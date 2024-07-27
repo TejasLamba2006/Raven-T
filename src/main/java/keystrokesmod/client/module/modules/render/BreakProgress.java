@@ -79,7 +79,7 @@ public class BreakProgress extends Module {
             }
         }
     }
-
+    @Override
     public void onUpdate() {
         if (mc.thePlayer.capabilities.isCreativeMode || !mc.thePlayer.capabilities.allowEdit) {
             this.resetVariables();

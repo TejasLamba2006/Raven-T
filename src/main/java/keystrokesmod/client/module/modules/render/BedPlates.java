@@ -51,7 +51,7 @@ public class BedPlates extends Module {
         this.registerSetting(layers = new SliderSetting("Layers", 3, 1, 10, 1));
         this.registerSetting(firstBed = new TickSetting("Only render first bed", false));
     }
-
+    @Override
     public void onUpdate() {
         if (Utils.Player.isPlayerInGame()) {
             if (updateCooldown.hasFinished()) {

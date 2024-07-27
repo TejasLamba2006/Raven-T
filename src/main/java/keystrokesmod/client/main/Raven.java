@@ -8,18 +8,16 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import com.google.common.eventbus.EventBus;
 
+import com.google.common.eventbus.Subscribe;
 import keystrokesmod.client.clickgui.kv.KvCompactGui;
 import keystrokesmod.client.clickgui.raven.ClickGui;
 import keystrokesmod.client.command.CommandManager;
 import keystrokesmod.client.config.ConfigManager;
 import keystrokesmod.client.event.forge.ForgeEventListener;
+import keystrokesmod.client.module.Module;
 import keystrokesmod.client.module.ModuleManager;
 import keystrokesmod.client.notifications.NotificationRenderer;
-import keystrokesmod.client.utils.DebugInfoRenderer;
-import keystrokesmod.client.utils.MouseManager;
-import keystrokesmod.client.utils.PingChecker;
-import keystrokesmod.client.utils.RenderUtils;
-import keystrokesmod.client.utils.Utils;
+import keystrokesmod.client.utils.*;
 import keystrokesmod.client.utils.font.FontUtil;
 import keystrokesmod.client.utils.version.VersionManager;
 import net.minecraft.client.Minecraft;
@@ -27,6 +25,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.jetbrains.annotations.NotNull;
 
 //Todo fix wtap
 /* todo dump
@@ -159,5 +159,29 @@ public class Raven {
 
     public static ScheduledExecutorService getExecutor() {
         return ex;
+    }
+    @Subscribe
+    public void onTick(@NotNull keystrokesmod.client.event.impl.TickEvent e) {
+            try {
+                if (Utils.Player.isPlayerInGame()) {
+                    if (Reflection.sendMessage) {
+                        Utils.Player.sendMessageToSelf("&cThere was an error, relaunch the game.");
+                        Reflection.sendMessage = false;
+                    }
+                    for (Module module : moduleManager.getModules()) {
+                        if (mc.currentScreen == null && module.canBeEnabled()) {
+                            module.keybind();
+                        } else if (mc.currentScreen instanceof ClickGui) {
+                            module.guiUpdate();
+                        }
+
+                        if (module.isEnabled()) {
+                            module.onUpdate();
+                        }
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+
     }
 }

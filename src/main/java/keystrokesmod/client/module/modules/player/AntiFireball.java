@@ -1,6 +1,7 @@
 package keystrokesmod.client.module.modules.player;
 
 import com.google.common.eventbus.Subscribe;
+import keystrokesmod.client.event.EventTiming;
 import keystrokesmod.client.event.impl.ForgeEvent;
 import keystrokesmod.client.event.impl.PreMotionEvent;
 import keystrokesmod.client.main.Raven;
@@ -62,10 +63,9 @@ public class AntiFireball extends Module {
             e.setPitch(rotations[1]);
         }
     }
-
-    @Subscribe
-    public void onUpdate(UpdateEvent e) {
-        if (!condition() || stopAttack()) {
+    @Override
+    public void onUpdate() {
+        if (!condition()) {
             return;
         }
         if (mc.currentScreen != null) {
@@ -74,6 +74,14 @@ public class AntiFireball extends Module {
             return;
         }
         fireball = this.getFireball();
+    }
+    @Subscribe
+    public void onPreUpdate(UpdateEvent e) {
+        if (e.getTiming() == EventTiming.POST)
+            return;
+        if (!condition() || stopAttack()) {
+            return;
+        }
         if (fireball != null) {
 //            if (Raven.moduleManager.getModuleByClazz(KillAura.class) != null && Raven.moduleManager.getModuleByClazz(KillAura.class).isEnabled()) {
 //                if (KillAura.target != null) {

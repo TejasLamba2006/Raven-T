@@ -172,6 +172,7 @@ public class Module {
                 return setting;
         return null;
     }
+    public void onUpdate() {}
 
     public void registerSetting(Setting Setting) {
         this.settings.add(Setting);

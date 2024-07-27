@@ -7,6 +7,7 @@ import com.google.common.eventbus.Subscribe;
 
 import keystrokesmod.client.event.impl.UpdateEvent;
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.module.setting.Setting;
 import keystrokesmod.client.module.setting.impl.DoubleSliderSetting;
 import keystrokesmod.client.module.setting.impl.SliderSetting;
@@ -68,8 +69,8 @@ public class AutoSoup extends Module {
                 case NONE:
                     int slot = getSoupSlot();
                     if(slot == -1 ) return;
-                    originalSlot = mc.thePlayer.inventory.currentItem;
-                    mc.thePlayer.inventory.currentItem = slot;
+                    originalSlot = SlotHandler.getCurrentSlot();
+                    SlotHandler.setCurrentSlot(slot);
 
                     cd.setCooldown((int) Utils.Client.ranModuleVal(delay, Utils.Java.rand())/4);
                     break;
@@ -84,7 +85,7 @@ public class AutoSoup extends Module {
                     cd.setCooldown((int) Utils.Client.ranModuleVal(delay, Utils.Java.rand())/4);
                     break;
                 case SWITCHEDANDDROPPED:
-                    mc.thePlayer.inventory.currentItem = originalSlot;
+                    SlotHandler.setCurrentSlot(originalSlot);
 
                     //cd.setCooldown(1);
                     cd.setCooldown((int) Utils.Client.ranModuleVal(coolDown, Utils.Java.rand()));

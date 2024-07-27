@@ -60,8 +60,8 @@ public class SlotHandler extends Module {
         }
     }
 
-    @Subscribe
-    public void onUpdate(UpdateEvent e) {
+    @Override
+    public void onUpdate() {
         switch ((Mode) mode.getMode()) {
             case DEFAULT:
                 mc.thePlayer.inventory.currentItem = getCurrentSlot();

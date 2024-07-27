@@ -1,6 +1,7 @@
 package keystrokesmod.client.module.modules.hotkey;
 
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.utils.Utils;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
@@ -31,8 +32,8 @@ public class Weapon extends Module {
 
         }
         if (index > -1 && damage > -1) {
-            if (mc.thePlayer.inventory.currentItem != index) {
-                Utils.Player.hotkeyToSlot(index);
+            if (SlotHandler.getCurrentSlot() != index) {
+                SlotHandler.setCurrentSlot(index);
             }
         }
         this.disable();

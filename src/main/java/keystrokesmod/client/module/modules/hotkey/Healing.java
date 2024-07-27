@@ -1,6 +1,7 @@
 package keystrokesmod.client.module.modules.hotkey;
 
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.module.setting.impl.ComboSetting;
 import keystrokesmod.client.module.setting.impl.SliderSetting;
 import keystrokesmod.client.module.setting.impl.TickSetting;
@@ -32,24 +33,24 @@ public class Healing extends Module {
             int preferedSlot = (int) hotbarSlotPreference.getInput() - 1;
 
             if (itemMode.getMode() == HealingItems.SOUP && isSoup(preferedSlot)) {
-                mc.thePlayer.inventory.currentItem = preferedSlot;
+                SlotHandler.setCurrentSlot(preferedSlot);
                 this.disable();
                 return;
             } else if (itemMode.getMode() == HealingItems.GAPPLE && isGapple(preferedSlot)) {
-                mc.thePlayer.inventory.currentItem = preferedSlot;
+                SlotHandler.setCurrentSlot(preferedSlot);
                 this.disable();
                 return;
             } else if (itemMode.getMode() == HealingItems.FOOD && isFood(preferedSlot)) {
-                mc.thePlayer.inventory.currentItem = preferedSlot;
+                SlotHandler.setCurrentSlot(preferedSlot);
                 this.disable();
                 return;
             } else if (itemMode.getMode() == HealingItems.ALL
                     && (isGapple(preferedSlot) || isFood(preferedSlot) || isSoup(preferedSlot))) {
-                mc.thePlayer.inventory.currentItem = preferedSlot;
+                SlotHandler.setCurrentSlot(preferedSlot);
                 this.disable();
                 return;
             } else if (itemMode.getMode() == HealingItems.HEAL_POT && (isHPot(preferedSlot))) {
-                mc.thePlayer.inventory.currentItem = preferedSlot;
+                SlotHandler.setCurrentSlot(preferedSlot);
                 this.disable();
                 return;
             }
@@ -58,23 +59,23 @@ public class Healing extends Module {
 
         for (int slot = 0; slot <= 8; slot++) {
             if (itemMode.getMode() == HealingItems.SOUP && isSoup(slot)) {
-                mc.thePlayer.inventory.currentItem = slot;
+                SlotHandler.setCurrentSlot(slot);
                 this.disable();
                 return;
             } else if (itemMode.getMode() == HealingItems.GAPPLE && isGapple(slot)) {
-                mc.thePlayer.inventory.currentItem = slot;
+                SlotHandler.setCurrentSlot(slot);
                 this.disable();
                 return;
             } else if (itemMode.getMode() == HealingItems.FOOD && isFood(slot)) {
-                mc.thePlayer.inventory.currentItem = slot;
+                SlotHandler.setCurrentSlot(slot);
                 this.disable();
                 return;
             } else if (itemMode.getMode() == HealingItems.ALL && (isGapple(slot) || isFood(slot) || isSoup(slot))) {
-                mc.thePlayer.inventory.currentItem = slot;
+                SlotHandler.setCurrentSlot(slot);
                 this.disable();
                 return;
             } else if (itemMode.getMode() == HealingItems.HEAL_POT && isHPot(slot)) {
-                mc.thePlayer.inventory.currentItem = slot;
+                SlotHandler.setCurrentSlot(slot);
                 this.disable();
                 System.out.println("a");
                 return;

@@ -1,6 +1,7 @@
 package keystrokesmod.client.module.modules.hotkey;
 
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.module.setting.impl.SliderSetting;
 import keystrokesmod.client.module.setting.impl.TickSetting;
 import keystrokesmod.client.utils.Utils;
@@ -28,7 +29,7 @@ public class Blocks extends Module {
 
             ItemStack itemInSlot = mc.thePlayer.inventory.getStackInSlot(preferedSlot);
             if (itemInSlot != null && itemInSlot.getItem() instanceof ItemBlock) {
-                mc.thePlayer.inventory.currentItem = preferedSlot;
+                SlotHandler.setCurrentSlot(preferedSlot);
                 this.disable();
                 return;
             }
@@ -39,8 +40,8 @@ public class Blocks extends Module {
             if (itemInSlot != null && itemInSlot.getItem() instanceof ItemBlock
                     && (((ItemBlock) itemInSlot.getItem()).getBlock().isFullBlock()
                             || ((ItemBlock) itemInSlot.getItem()).getBlock().isFullCube())) {
-                if (mc.thePlayer.inventory.currentItem != slot) {
-                    mc.thePlayer.inventory.currentItem = slot;
+                if (SlotHandler.getCurrentSlot() != slot) {
+                    SlotHandler.setCurrentSlot(slot);
                 } else {
                     return;
                 }

@@ -1,6 +1,7 @@
 package keystrokesmod.client.module.modules.hotkey;
 
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.module.setting.impl.TickSetting;
 import keystrokesmod.client.utils.Utils;
 import net.minecraft.item.ItemArmor;
@@ -71,7 +72,7 @@ public class Armour extends Module {
                 }
             }
             if (index > -1 || strength > -1) {
-                mc.thePlayer.inventory.currentItem = index;
+                SlotHandler.setCurrentSlot(index);
                 this.disable();
                 this.onDisable();
                 return;

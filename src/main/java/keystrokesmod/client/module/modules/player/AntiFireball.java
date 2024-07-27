@@ -5,7 +5,6 @@ import keystrokesmod.client.event.EventTiming;
 import keystrokesmod.client.event.impl.ForgeEvent;
 import keystrokesmod.client.event.impl.PreMotionEvent;
 import keystrokesmod.client.main.Raven;
-import keystrokesmod.client.module.modules.combat.aura.KillAura;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import keystrokesmod.client.event.impl.UpdateEvent;
 import keystrokesmod.client.module.Module;
@@ -54,6 +53,7 @@ public class AntiFireball extends Module {
             }
             if (getHeldItem != null && (getHeldItem.getItem() instanceof ItemBow || getHeldItem.getItem() instanceof ItemSnowball || getHeldItem.getItem() instanceof ItemEgg || getHeldItem.getItem() instanceof ItemFishingRod) && !projectileRotate.isToggled()) {
                 return;
+
             }
 //            if (Raven.moduleManager.getModuleByClazz(Scaffold.class) != null && Scaffold.stopRotation()) {
 //                return;
@@ -136,7 +136,7 @@ public class AntiFireball extends Module {
         this.attack = false;
     }
     private boolean stopAttack() {
-        return (Raven.moduleManager.getModuleByClazz(BedAura.class) != null && Raven.moduleManager.getModuleByClazz(BedAura.class).isEnabled() && BedAura.m != null) || (Raven.moduleManager.getModuleByClazz(KillAura.class) != null && Raven.moduleManager.getModuleByClazz(KillAura.class).isEnabled() && KillAura.target != null);
+        return (Raven.moduleManager.getModuleByClazz(BedAura.class) != null && Raven.moduleManager.getModuleByClazz(BedAura.class).isEnabled() && BedAura.m != null);
     }
 
     private boolean condition() {

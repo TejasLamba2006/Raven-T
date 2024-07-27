@@ -211,13 +211,6 @@ public class Utils {
             return null;
         }
 
-        public static void hotkeyToSlot(int slot) {
-            if (!isPlayerInGame())
-                return;
-
-            mc.thePlayer.inventory.currentItem = slot;
-        }
-
         public static void sendMessageToSelf(String txt) {
             if (isPlayerInGame()) {
                 String m = Client.reformat("&7[&6R&7]&r " + txt);
@@ -333,10 +326,6 @@ public class Utils {
             BlockPos p = new BlockPos(MathHelper.floor_double(x), MathHelper.floor_double(y),
                     MathHelper.floor_double(z));
             return mc.theWorld.isBlockFullCube(p) || mc.theWorld.isBlockNormalCube(p, false);
-        }
-
-        public static int getCurrentPlayerSlot() {
-            return mc.thePlayer.inventory.currentItem;
         }
 
         public static boolean isPlayerHoldingSword() {

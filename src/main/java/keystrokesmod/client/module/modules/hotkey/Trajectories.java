@@ -1,6 +1,7 @@
 package keystrokesmod.client.module.modules.hotkey;
 
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.module.setting.impl.SliderSetting;
 import keystrokesmod.client.module.setting.impl.TickSetting;
 import keystrokesmod.client.utils.Utils;
@@ -29,7 +30,7 @@ public class Trajectories extends Module {
             int preferedSlot = (int) hotbarSlotPreference.getInput() - 1;
 
             if (checkSlot(preferedSlot)) {
-                mc.thePlayer.inventory.currentItem = preferedSlot;
+                SlotHandler.setCurrentSlot(preferedSlot);
                 this.disable();
                 return;
             }
@@ -37,8 +38,8 @@ public class Trajectories extends Module {
 
         for (int slot = 0; slot <= 8; slot++) {
             if (checkSlot(slot)) {
-                if (mc.thePlayer.inventory.currentItem != slot) {
-                    mc.thePlayer.inventory.currentItem = slot;
+                if (SlotHandler.getCurrentSlot() != slot) {
+                    SlotHandler.setCurrentSlot(slot);
                 } else {
                     return;
                 }

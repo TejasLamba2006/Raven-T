@@ -4,11 +4,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.entity.EntityPlayerSP;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-
-import keystrokesmod.client.event.impl.MoveInputEvent;
+import keystrokesmod.client.module.modules.other.RotationHandler;
+import keystrokesmod.client.event.impl.PrePlayerInputEvent;
 import keystrokesmod.client.main.Raven;
 import keystrokesmod.client.module.Module;
 import keystrokesmod.client.module.modules.player.SafeWalk;
@@ -480,33 +481,35 @@ public abstract class MixinEntity {
      * @reason friction
      */
     @Overwrite
-    public void moveFlying(float strafe, float forward, float fric) {
-        MoveInputEvent e = new MoveInputEvent(strafe, forward, fric, this.rotationYaw);
-        if((Object) this == Minecraft.getMinecraft().thePlayer)
-            Raven.eventBus.post(e);
+    public void moveFlying(float p_moveFlying_1_, float p_moveFlying_2_, float p_moveFlying_3_) {
+        float yaw = this.rotationYaw;
+        if((Object) this instanceof EntityPlayerSP) {
+            PrePlayerInputEvent prePlayerInput = new PrePlayerInputEvent(p_moveFlying_1_, p_moveFlying_2_, p_moveFlying_3_, RotationHandler.getMovementYaw((Entity) (Object) this));
+            Raven.eventBus.post(prePlayerInput);
+            if (prePlayerInput.isCanceled()) {
+                return;
+            }
+            p_moveFlying_1_ = prePlayerInput.getStrafe();
+            p_moveFlying_2_ = prePlayerInput.getForward();
+            p_moveFlying_3_ = prePlayerInput.getFriction();
+            yaw = prePlayerInput.getYaw();
+        }
 
-        strafe = e.getStrafe();
-        forward = e.getForward();
-        fric = e.getFriction();
-        float yaw = e.getYaw();
-
-        float f = (strafe * strafe) + (forward * forward);
-
+        float f = p_moveFlying_1_ * p_moveFlying_1_ + p_moveFlying_2_ * p_moveFlying_2_;
         if (f >= 1.0E-4F) {
             f = MathHelper.sqrt_float(f);
             if (f < 1.0F) {
                 f = 1.0F;
             }
 
-            f = fric / f;
-            strafe *= f;
-            forward *= f;
-            float f1 = MathHelper.sin((yaw * 3.1415927F) / 180.0F);
-            float f2 = MathHelper.cos((yaw * 3.1415927F) / 180.0F);
-            this.motionX += (strafe * f2) - (forward * f1);
-            this.motionZ += (forward * f2) + (strafe * f1);
+            f = p_moveFlying_3_ / f;
+            p_moveFlying_1_ *= f;
+            p_moveFlying_2_ *= f;
+            float f1 = MathHelper.sin(yaw * 3.1415927F / 180.0F);
+            float f2 = MathHelper.cos(yaw * 3.1415927F / 180.0F);
+            this.motionX += p_moveFlying_1_ * f2 - p_moveFlying_2_ * f1;
+            this.motionZ += p_moveFlying_2_ * f2 + p_moveFlying_1_ * f1;
         }
-
     }
 
 }

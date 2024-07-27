@@ -107,7 +107,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
     public void onUpdateWalkingPlayer() {
 
         Raven.eventBus.post(new TickEvent());
-        Raven.eventBus.post(new PreMotionEvent(
+        PreMotionEvent preMotionEvent = new PreMotionEvent(
                 this.posX,
                 this.getEntityBoundingBox().minY,
                 this.posZ,
@@ -116,8 +116,9 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
                 this.onGround,
                 this.isSprinting(),
                 this.isSneaking()
-        ));
-        boolean flag = this.isSprinting();
+        );
+        Raven.eventBus.post(preMotionEvent);
+        boolean flag = preMotionEvent.isSprinting();
         if (flag != this.serverSprintState) {
             if (flag)
 				this.sendQueue
@@ -129,7 +130,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
             this.serverSprintState = flag;
         }
 
-        boolean flag1 = this.isSneaking();
+        boolean flag1 = preMotionEvent.isSneaking();
         if (flag1 != this.serverSneakState) {
             if (flag1)
 				this.sendQueue
@@ -142,7 +143,10 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
         }
 
         if (this.isCurrentViewEntity()) {
-
+            if (PreMotionEvent.setRenderYaw()) {
+                RotationUtils.setRenderYaw(preMotionEvent.getYaw());
+                preMotionEvent.setRenderYaw(false);
+            }
             UpdateEvent e = new UpdateEvent(EventTiming.PRE, this.posX, this.getEntityBoundingBox().minY, this.posZ,
                     this.rotationYaw, this.rotationPitch, this.onGround);
             Raven.eventBus.post(e);

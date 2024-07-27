@@ -49,7 +49,7 @@ public class MiddleClick extends Module {
 
         if (pearlEvent < 4) {
             if (pearlEvent == 3)
-                mc.thePlayer.inventory.currentItem = prevSlot;
+                SlotHandler.setCurrentSlot(prevSlot);
             pearlEvent++;
         }
 
@@ -58,8 +58,8 @@ public class MiddleClick extends Module {
                 for (int slot = 0; slot <= 8; slot++) {
                     ItemStack itemInSlot = mc.thePlayer.inventory.getStackInSlot(slot);
                     if (itemInSlot != null && itemInSlot.getItem() instanceof ItemEnderPearl) {
-                        prevSlot = mc.thePlayer.inventory.currentItem;
-                        mc.thePlayer.inventory.currentItem = slot;
+                        prevSlot = SlotHandler.getCurrentSlot();
+                        SlotHandler.setCurrentSlot(slot);
                         this.bot.mousePress(InputEvent.BUTTON3_MASK);
                         this.bot.mouseRelease(InputEvent.BUTTON3_MASK);
                         pearlEvent = 0;

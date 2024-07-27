@@ -5,6 +5,7 @@ import keystrokesmod.client.event.impl.Render2DEvent;
 import keystrokesmod.client.event.impl.TickEvent;
 import keystrokesmod.client.main.Raven;
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.module.setting.impl.DescriptionSetting;
 import keystrokesmod.client.module.setting.impl.DoubleSliderSetting;
 import keystrokesmod.client.module.setting.impl.SliderSetting;
@@ -178,7 +179,7 @@ public class SafeWalk extends Module {
                 int totalBlocks = 0;
                 if (BlockAmountInfo.values()[(int) blockShowMode.getInput()
                         - 1] == BlockAmountInfo.BLOCKS_IN_CURRENT_STACK) {
-                    totalBlocks = Utils.Player.getBlockAmountInCurrentStack(mc.thePlayer.inventory.currentItem);
+                    totalBlocks = Utils.Player.getBlockAmountInCurrentStack(SlotHandler.getCurrentSlot());
                 } else {
                     for (int slot = 0; slot < 36; slot++) {
                         totalBlocks += Utils.Player.getBlockAmountInCurrentStack(slot);

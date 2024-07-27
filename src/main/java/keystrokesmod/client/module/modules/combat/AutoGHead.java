@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 
 import keystrokesmod.client.event.impl.UpdateEvent;
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.module.setting.impl.DoubleSliderSetting;
 import keystrokesmod.client.module.setting.impl.SliderSetting;
 import keystrokesmod.client.utils.CoolDown;
@@ -41,8 +42,8 @@ public class AutoGHead extends Module {
                 case NONE:
                     int slot = getGHeadSlot();
                     if(slot == -1 ) return;
-                    originalSlot = mc.thePlayer.inventory.currentItem;
-                    mc.thePlayer.inventory.currentItem = slot;
+                    originalSlot = SlotHandler.getCurrentSlot();
+                    SlotHandler.setCurrentSlot(slot);
 
                     cd.setCooldown((int) Utils.Client.ranModuleVal(delay, Utils.Java.rand())/3);
                     break;
@@ -52,7 +53,7 @@ public class AutoGHead extends Module {
                     cd.setCooldown((int) Utils.Client.ranModuleVal(delay, Utils.Java.rand())/3);
                     break;
                 case SWITCHEDANDCLICKED:
-                    mc.thePlayer.inventory.currentItem = originalSlot;
+                    SlotHandler.setCurrentSlot(originalSlot);
 
                     cd.setCooldown((int) Utils.Client.ranModuleVal(coolDown, Utils.Java.rand()));
                     break;

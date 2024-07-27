@@ -1,6 +1,7 @@
 package keystrokesmod.client.module.modules.hotkey;
 
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.module.setting.impl.SliderSetting;
 import keystrokesmod.client.module.setting.impl.TickSetting;
 import keystrokesmod.client.utils.Utils;
@@ -37,7 +38,7 @@ public class Pearl extends Module {
             int preferedSlot = (int) hotbarSlotPreference.getInput() - 1;
 
             if (checkSlot(preferedSlot)) {
-                mc.thePlayer.inventory.currentItem = preferedSlot;
+                SlotHandler.setCurrentSlot(preferedSlot);
                 this.disable();
                 return;
             }
@@ -45,7 +46,7 @@ public class Pearl extends Module {
 
         for (int slot = 0; slot <= 8; slot++) {
             if (checkSlot(slot)) {
-                mc.thePlayer.inventory.currentItem = slot;
+                SlotHandler.setCurrentSlot(slot);
                 this.disable();
                 return;
             }

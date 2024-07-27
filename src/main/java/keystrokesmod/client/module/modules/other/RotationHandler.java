@@ -34,7 +34,7 @@ public final class RotationHandler extends Module {
     private final ComboSetting smoothBack = new ComboSetting("Smooth back", smoothBackMode.NONE);
     private final SliderSetting aimSpeed = new SliderSetting("Aim speed", 5, 1, 15, 0.1);
     public static final TickSetting rotateBody = new TickSetting("Rotate body", true);
-    public static final TickSetting fullBody = new TickSetting("Full body", false);
+    public static final TickSetting fullBody = new TickSetting("Full body", true);
     public static final SliderSetting randomYawFactor = new SliderSetting("Random yaw factor", 1.0, 0.0, 10.0, 1.0);
 
     public RotationHandler() {

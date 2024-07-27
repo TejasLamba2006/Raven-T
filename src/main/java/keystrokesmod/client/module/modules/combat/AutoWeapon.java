@@ -3,6 +3,7 @@ package keystrokesmod.client.module.modules.combat;
 import com.google.common.eventbus.Subscribe;
 import keystrokesmod.client.event.impl.Render2DEvent;
 import keystrokesmod.client.module.Module;
+import keystrokesmod.client.module.modules.other.SlotHandler;
 import keystrokesmod.client.module.setting.impl.TickSetting;
 import keystrokesmod.client.utils.Utils;
 import org.lwjgl.input.Mouse;
@@ -30,7 +31,7 @@ public class AutoWeapon extends Module {
             if (onWeapon) {
                 onWeapon = false;
                 if (goBackToPrevSlot.isToggled()) {
-                    mc.thePlayer.inventory.currentItem = prevSlot;
+                    SlotHandler.setCurrentSlot(prevSlot);
                 }
             }
         } else {
@@ -40,14 +41,14 @@ public class AutoWeapon extends Module {
             }
 
             if (!onWeapon) {
-                prevSlot = mc.thePlayer.inventory.currentItem;
+                prevSlot = SlotHandler.getCurrentSlot();
                 onWeapon = true;
 
                 int maxDamageSlot = Utils.Player.getMaxDamageSlot();
 
                 if (maxDamageSlot > 0 && Utils.Player.getSlotDamage(maxDamageSlot) > Utils.Player
-                        .getSlotDamage(mc.thePlayer.inventory.currentItem)) {
-                    mc.thePlayer.inventory.currentItem = maxDamageSlot;
+                        .getSlotDamage(SlotHandler.getCurrentSlot())) {
+                    SlotHandler.setCurrentSlot(maxDamageSlot);
                 }
             }
         }

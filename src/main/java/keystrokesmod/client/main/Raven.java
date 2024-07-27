@@ -74,7 +74,7 @@ fix version checks being completely fucked
 
 public class Raven {
 
-	public static boolean debugger;
+    public static boolean debugger;
     public static final VersionManager versionManager = new VersionManager();
     public static CommandManager commandManager;
     public static final String sourceLocation = "https://github.com/TejasLamba2006/Raven-T";
@@ -84,7 +84,7 @@ public class Raven {
             "Your version of Raven T (" + versionManager.getClientVersion().toString() + ") is outdated!",
             "Enter the command update into client CommandLine to open the download page",
             "or just enable the update module to get a message in chat.", "",
-            "Newest version: " + versionManager.getLatestVersion().toString() };
+            "Newest version: " + versionManager.getLatestVersion().toString()};
     public static ConfigManager configManager;
     public static ClientConfig clientConfig;
 
@@ -115,7 +115,8 @@ public class Raven {
         register(new PingChecker());
         register(new ForgeEventListener());
         eventBus.register(NotificationRenderer.notificationRenderer);
-
+        Reflection.getFields();
+        Reflection.getMethods();
         FontUtil.bootstrap();
 
         Runtime.getRuntime().addShutdownHook(new Thread(ex::shutdown));
@@ -160,28 +161,5 @@ public class Raven {
     public static ScheduledExecutorService getExecutor() {
         return ex;
     }
-    @Subscribe
-    public void onTick(@NotNull keystrokesmod.client.event.impl.TickEvent e) {
-            try {
-                if (Utils.Player.isPlayerInGame()) {
-                    if (Reflection.sendMessage) {
-                        Utils.Player.sendMessageToSelf("&cThere was an error, relaunch the game.");
-                        Reflection.sendMessage = false;
-                    }
-                    for (Module module : moduleManager.getModules()) {
-                        if (mc.currentScreen == null && module.canBeEnabled()) {
-                            module.keybind();
-                        } else if (mc.currentScreen instanceof ClickGui) {
-                            module.guiUpdate();
-                        }
 
-                        if (module.isEnabled()) {
-                            module.onUpdate();
-                        }
-                    }
-                }
-            } catch (Exception ignored) {
-            }
-
-    }
 }

@@ -80,7 +80,7 @@ public class WaterBucket extends Module {
         } else {
             for (int i = 0; i < InventoryPlayer.getHotbarSize(); ++i) {
                 if (this.containsItem(mc.thePlayer.inventory.mainInventory[i], Items.water_bucket)) {
-                    mc.thePlayer.inventory.currentItem = i;
+                    SlotHandler.setCurrentSlot(i);
                     return true;
                 }
             }

@@ -16,7 +16,8 @@
         "MixinNetworkManager",
         "MixinEntityLivingBase",
         "PlayerControllerMPAccessor",
-        "EntityAccessor"
+        "EntityAccessor",
+        "MixinMovementInputFromOptions"
     ],
     "client": [
         "IMinecraft"

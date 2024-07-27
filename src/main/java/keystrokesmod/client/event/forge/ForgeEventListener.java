@@ -34,14 +34,27 @@ public class ForgeEventListener {
     public void onTick(TickEvent.ClientTickEvent e) {
         if (e.phase == TickEvent.Phase.END) {
             Raven.eventBus.post(new keystrokesmod.client.event.impl.TickEvent());
+            if (Utils.Player.isPlayerInGame())
+                for (Module module : Raven.moduleManager.getModules())
+                    if (Minecraft.getMinecraft().currentScreen instanceof ClickGui)
+                        module.guiUpdate();
         }
     }
 
     @SubscribeEvent
     public void onRenderTick(TickEvent.RenderTickEvent e) {
         if (e.phase == TickEvent.Phase.END) {
+            if (Utils.Player.isPlayerInGame())
+                for (Module module : Raven.moduleManager.getModules()) {
+                    if (Minecraft.getMinecraft().currentScreen == null)
+                        module.keybind();
+                    if (module.isEnabled()) {
+                        module.onUpdate();
+                    }
+                }
             Raven.eventBus.post(new Render2DEvent());
         }
+
         Raven.eventBus.post(new ForgeEvent(e));
     }
 

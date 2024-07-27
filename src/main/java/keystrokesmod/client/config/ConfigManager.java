@@ -32,7 +32,7 @@ public class ConfigManager {
         if (!configDirectory.isDirectory()) {
             configDirectory.mkdirs();
         }
-        File defaultFile = new File(configDirectory, "default.bplus");
+        File defaultFile = new File(configDirectory, "default.tplus");
         this.config = new Config(defaultFile);
         discoverConfigs();
         configModuleManager = new ConfigModuleManager();
@@ -73,7 +73,7 @@ public class ConfigManager {
             return; // nothing to discover if there are no files in the directory
 
         for (File file : Objects.requireNonNull(configDirectory.listFiles())) {
-            if (file.getName().endsWith(".bplus")) {
+            if (file.getName().endsWith(".tplus")) {
                 if (!isOutdated(file)) {
                     configs.add(new Config(new File(file.getPath())));
                 }
@@ -158,7 +158,7 @@ public class ConfigManager {
             discoverConfigs();
             if (this.configs.size() < 2) {
                 this.resetConfig();
-                File defaultFile = new File(configDirectory, "default.bplus");
+                File defaultFile = new File(configDirectory, "default.tplus");
                 this.config = new Config(defaultFile);
                 save();
             } else {

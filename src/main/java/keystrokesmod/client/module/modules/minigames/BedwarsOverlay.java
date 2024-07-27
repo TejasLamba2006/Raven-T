@@ -108,14 +108,6 @@ public class BedwarsOverlay extends Module {
     }
 
     private void drawStats(NetworkPlayerInfo player, FontRenderer fr) {
-        /*
-         * if(!playerStats.containsKey(player.getGameProfile().getId())){
-         * Ravenbplus.getExecutor().execute(() -> {
-         * playerStats.put(player.getGameProfile().getId().toString(),
-         * getBedwarsStats(player.getGameProfile().getId().toString())); }); } else {
-         * 
-         * }
-         */
         String name = player.getGameProfile().getName();
         String UUID = player.getGameProfile().getId().toString();
         if (Utils.URLS.hypixelApiKey.isEmpty()) {
@@ -133,7 +125,6 @@ public class BedwarsOverlay extends Module {
             int[] stats = playerStats.get(UUID);
 
             if (stats.length == 1 && stats[0] == -16) {
-                // we are loading player stats so return
                 return;
             }
 

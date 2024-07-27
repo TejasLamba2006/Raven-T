@@ -81,7 +81,7 @@ public class Raven {
     public static final String downloadLocation = "https://github.com/TejasLamba2006/Raven-T/releases/latest";
     public static final String discord = "https://discord.gg/RV6sWX9d7p";
     public static String[] updateText = {
-            "Your version of Raven B++ (" + versionManager.getClientVersion().toString() + ") is outdated!",
+            "Your version of Raven T (" + versionManager.getClientVersion().toString() + ") is outdated!",
             "Enter the command update into client CommandLine to open the download page",
             "or just enable the update module to get a message in chat.", "",
             "Newest version: " + versionManager.getLatestVersion().toString() };
@@ -129,13 +129,13 @@ public class Raven {
         clientConfig = new ClientConfig();
         clientConfig.applyConfig();
 
-        ex.execute(() -> {
-            try {
-                LaunchTracker.registerLaunch();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+//        ex.execute(() -> {
+//            try {
+//                LaunchTracker.registerLaunch();
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
     }
 
     @SuppressWarnings("unused")

@@ -112,12 +112,12 @@ public class ClickGui extends GuiScreen {
             }
         } else if (GuiModule.useCustomFont())
 			FontUtil.normal.drawSmoothString(
-		            "Raven B++ v" + clientVersion + " | Config: " + Raven.configManager.getConfig().getName(), 4,
+		            "Raven T v" + clientVersion + " | Config: " + Raven.configManager.getConfig().getName(), 4,
 		            this.height - 3 - mc.fontRendererObj.FONT_HEIGHT,
 		            Utils.Client.astolfoColorsDraw(10, 14, speed));
 		else
 			mc.fontRendererObj.drawStringWithShadow(
-		            "Raven B++ v" + clientVersion + " | Config: " + Raven.configManager.getConfig().getName(), 4,
+		            "Raven T v" + clientVersion + " | Config: " + Raven.configManager.getConfig().getName(), 4,
 		            this.height - 3 - mc.fontRendererObj.FONT_HEIGHT,
 		            Utils.Client.astolfoColorsDraw(10, 14, speed));
 

@@ -7,7 +7,7 @@ import keystrokesmod.client.utils.Utils;
 
 public class Discord extends Command {
     public Discord() {
-        super("discord", "Allows you to join the Raven B++ discord", 0, 3, new String[] { "copy", "open", "print" },
+        super("discord", "Allows you to join the Raven T discord", 0, 3, new String[] { "copy", "open", "print" },
                 new String[] { "dc", "chat" });
     }
 
